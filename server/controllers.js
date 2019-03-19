@@ -1,11 +1,12 @@
-const db = require('../database/index.js');
+const db = require('../database/models.js');
 
 module.exports = {
   users: {
     post: (req, res) => {
       console.log('in post');
-      const { firstName, lastName, email,user_password,birthday,phone } = req.body;
-      db.users.post(firstName, lastName, email, user_password, birthday, phone, (err, results) => {
+      console.log(req.body)
+      var params = [req.body['firstname'],req.body['lastname'],req.body['email'],req.body['user_password'],req.body['birthday'],req.body['phone']]
+      db.users.post(params, (err, results) => {
         if (err) {
           res.status(404).send(err)
         } else {
