@@ -16,6 +16,20 @@ module.exports = {
       pool.query(str, (err, id) => {
         response(err, id);
       })
+    },
+    startRes: (params, response) => {
+      const { id, actual_start } = params;
+      const str = `UPDATE reservations SET actual_start='${actual_start}' WHERE id=${id};`;
+      pool.query(str, (err) => {
+        response(err);
+      })
+    },
+    endRes: (params, response) => {
+      const { id, actual_end } = params;
+      const str = `UPDATE reservations SET actual_end='${actual_end}' WHERE id=${id};`;
+      pool.query(str, (err) => {
+        response(err);
+      })
     }
   }
 }
