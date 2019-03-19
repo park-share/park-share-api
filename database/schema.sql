@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS park-share;
+CREATE DATABASE IF NOT EXISTS park_share;
 
 CREATE TABLE IF NOT EXISTS users (
   id                serial PRIMARY KEY,
@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS user_vehicles (
   id                serial PRIMARY KEY,
+  user_id           INTEGER,
   car_make          varchar(30),
   car_model         varchar(30),
   license_plate     varchar(10),
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS user_vehicles (
 
 CREATE TABLE IF NOT EXISTS user_payment (
   id                serial PRIMARY KEY,
+  user_id           INTEGER,
   credit_card       varchar(20),
   billing_address   TEXT,
   FOREIGN KEY (user_id) REFERENCES users (id)
@@ -39,6 +41,7 @@ CREATE TABLE IF NOT EXISTS owners (
 
 CREATE TABLE IF NOT EXISTS spaces (
   id                serial PRIMARY KEY,
+  owner_id           INTEGER,
   parking_address   TEXT,
   directions        TEXT,
   weekday_rate      REAL,
@@ -55,6 +58,8 @@ CREATE TABLE IF NOT EXISTS spaces (
 
 CREATE TABLE IF NOT EXISTS reservations (
   id                serial PRIMARY KEY,
+  user_id           INTEGER,
+  owner_id           INTEGER,
   start_res         varchar(20),
   end_res           varchar(20),
   actual_start      varchar(20),
