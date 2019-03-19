@@ -39,8 +39,10 @@ CREATE TABLE IF NOT EXISTS owners (
 
 CREATE TABLE IF NOT EXISTS spaces (
   id                serial PRIMARY KEY,
-  owner_id           INTEGER,
+  owner_id          INTEGER,
   parking_address   TEXT,
+  latitudes         DECIMAL,
+  longitudes        DECIMAL,
   directions        TEXT,
   weekday_rate      REAL,
   weekend_rate      REAL,
