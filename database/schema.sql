@@ -57,13 +57,11 @@ CREATE TABLE IF NOT EXISTS spaces (
 CREATE TABLE IF NOT EXISTS reservations (
   id                serial PRIMARY KEY,
   user_id           INTEGER,
-  owner_id          INTEGER,
   space_id          INTEGER,
   start_res         varchar(20),
   end_res           varchar(20),
   actual_start      varchar(20),
   actual_end        varchar(20),
   FOREIGN KEY (user_id) REFERENCES users (id),
-  FOREIGN KEY (owner_id) REFERENCES owners (id),
   FOREIGN KEY (space_id) REFERENCES spaces (id)
 );
