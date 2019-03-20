@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS park_share;
-
 CREATE TABLE IF NOT EXISTS users (
   id                serial PRIMARY KEY,
   firstname         varchar(40),
