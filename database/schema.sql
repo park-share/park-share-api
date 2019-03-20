@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
   firstname         varchar(40),
   lastname          varchar(40),
   email             varchar(100) UNIQUE,
-  user_password     varchar(30),
+  user_password     chkpass,
   birthday          DATE,
   phone             varchar(12)
 );
