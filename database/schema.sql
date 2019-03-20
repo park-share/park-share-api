@@ -3,7 +3,11 @@ CREATE TABLE IF NOT EXISTS users (
   firstname         varchar(40),
   lastname          varchar(40),
   email             varchar(100) UNIQUE,
+<<<<<<< HEAD
   user_password     TEXT,
+=======
+  user_password     chkpass,
+>>>>>>> Encrypt password
   birthday          DATE,
   phone             varchar(12)
 );
