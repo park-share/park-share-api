@@ -12,6 +12,9 @@ const passport = require("passport");
 const https = require('https');
 const http = require('http');
 
+const https = require('https');
+const http = require('http');
+
 app.use(parser.json());
 app.use(parser.urlencoded({extended:false}));
 app.use(passport.initialize());
