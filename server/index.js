@@ -6,7 +6,11 @@ const path = require('path');
 const router = require('./routes');
 const cors = require('cors');
 const LocalStrategy = require("passport-local").Strategy;
-const https= require('https');
+
+
+// const passport = require('./passport.js');
+
+const https = require('https');
 const http = require('http');
 const cookieParser = require("cookie-parser");
 var flash = require("connect-flash");
@@ -24,6 +28,14 @@ app.use(cors());
 // app.use(express.static(path.join(__dirname,'..')))
 app.use(express.static(path.join(__dirname + "/../../park-share-ui/client/dist/")));
 app.use('/api',router);
+
+app.use(function(err,req,res,next) {
+  res.status(err.status || 500);
+  res.json({
+    message: err.message,
+    error: req.app.get('env') === 'development' ? err : {}
+  });
+});
 
 http.createServer(app).listen(PORT, console.log('HTTP LISTENING TO', PORT));
 https.createServer(app).listen(SSLPORT, console.log('HTTPS LISTENING TO', SSLPORT));
