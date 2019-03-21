@@ -17,7 +17,10 @@ module.exports = {
   },
   map: {
     availableSpots: (params, response) => {
-      
+      const str = 'SELECT * FROM unavailable;';
+      pool.query(str, (err, spots) => {
+        response(err, spots);
+      })
     }
   },
   reservations: {
