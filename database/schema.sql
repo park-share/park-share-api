@@ -3,11 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
   firstname         varchar(40),
   lastname          varchar(40),
   email             varchar(100) UNIQUE,
-<<<<<<< HEAD
   user_password     TEXT,
-=======
-  user_password     chkpass,
->>>>>>> Encrypt password
   birthday          DATE,
   phone             varchar(12)
 );
@@ -45,8 +41,8 @@ CREATE TABLE IF NOT EXISTS spaces (
   id                serial PRIMARY KEY,
   owner_id          INTEGER,
   parking_address   TEXT,
-  latitudes         DECIMAL,
-  longitudes        DECIMAL,
+  latitudes         TEXT,
+  longitudes        TEXT,
   directions        TEXT,
   weekday_rate      REAL,
   weekend_rate      REAL,
