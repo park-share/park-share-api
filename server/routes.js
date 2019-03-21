@@ -19,5 +19,8 @@ router
   .route('/signup')
   .post(controller.signup);
 
+// router
+//   .route('/signin')
+//   .post(controller.signin);
 
 module.exports = router;
