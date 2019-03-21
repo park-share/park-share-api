@@ -4,6 +4,7 @@ const PORT = 3000;
 const SSLPORT = 3030;
 const path = require('path');
 const router = require('./routes');
+const cors = require('cors');
 const app = express();
 
 const https = require('https');
