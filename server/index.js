@@ -6,17 +6,13 @@ const path = require('path');
 const router = require('./routes');
 const cors = require('cors');
 const LocalStrategy = require("passport-local").Strategy;
-
-
 const app = express();
 const https = require('https');
 const http = require('http');
 const cookieParser = require("cookie-parser");
 var flash = require("connect-flash");
 // const passport = require('./passport.js');
-require('./passport');
 
-const app = express();
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 // app.use(passport.initialize());
