@@ -17,7 +17,7 @@ module.exports = {
   },
   map: {
     availableSpots: (params, response) => {
-
+      
     }
   },
   reservations: {
