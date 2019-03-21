@@ -5,23 +5,36 @@ const SSLPORT = 3030;
 const path = require('path');
 const router = require('./routes');
 const cors = require('cors');
-var request = require('request');
-const app = express();
-const passport = require("passport");
-
-const https = require('https');
+const LocalStrategy = require("passport-local").Strategy;
+const https= require('https');
 const http = require('http');
+const cookieParser = require("cookie-parser");
+var flash = require("connect-flash");
+// const passport = require('./passport.js');
+require('./passport');
 
+const app = express();
 const https = require('https');
 const http = require('http');
 
 app.use(parser.json());
-app.use(parser.urlencoded({extended:false}));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(parser.urlencoded({extended:true}));
+// app.use(passport.initialize());
+// app.use(passport.session());
+// app.use(cookieParser());
+// app.use(flash());
+app.use(cors());
 // app.use(express.static(path.join(__dirname,'..')))
 app.use(express.static(path.join(__dirname + "/../../park-share-ui/client/dist/")));
 app.use('/api',router);
+
+app.use(function(err,req,res,next) {
+  res.status(err.status || 500);
+  res.json({
+    message: err.message,
+    error: req.app.get('env') === 'development' ? err : {}
+  });
+});
 
 http.createServer(app).listen(PORT, console.log('HTTP LISTENING TO', PORT));
 https.createServer(app).listen(SSLPORT, console.log('HTTPS LISTENING TO', SSLPORT));
