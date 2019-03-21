@@ -27,7 +27,7 @@ module.exports = {
       pool.query(queryStr, params, (err, results)=> {
         callback(err, results);
         // console.log(params);
-      })
+      );
     }
   },
   // getOneByEmail: function(email) {
