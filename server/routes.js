@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./signup/controllers.js');
 const resController = require('./reservation/controller.js');
-
+const loginController = require('./login/controller.js');
 router
   .route('/reservations/post')
   .post(resController.makeReservation);
@@ -20,6 +20,14 @@ router
   .post(controller.signup);
 
 // router
+//   .route('/login')
+//   .get(loginController.login);
+
+// router 
+//   .route('/login')
+//   .post(loginController.login);
+
+// router 
 //   .route('/signin')
 //   .post(controller.signin);
 
