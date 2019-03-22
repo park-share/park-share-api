@@ -46,13 +46,6 @@ CREATE TABLE IF NOT EXISTS spaces (
   directions        TEXT,
   weekday_rate      REAL,
   weekend_rate      REAL,
-  monday            varchar(100),
-  tuesday           varchar(100),
-  wednesday         varchar(100),
-  thursday          varchar(100),
-  friday            varchar(100),
-  saturday          varchar(100),
-  sunday            varchar(100),
   FOREIGN KEY (owner_id) REFERENCES owners (id)
 );
 
@@ -67,3 +60,11 @@ CREATE TABLE IF NOT EXISTS reservations (
   FOREIGN KEY (user_id) REFERENCES users (id),
   FOREIGN KEY (space_id) REFERENCES spaces (id)
 );
+
+CREATE TABLE IF NOT EXISTS unavailable (
+  id                serial PRIMARY KEY,
+  space_id          INTEGER,
+  unavailable_start varchar(100),
+  unavailable_end   varchar(100),
+  FOREIGN KEY (space_id) REFERENCES spaces (id)
+)
