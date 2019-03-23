@@ -4,6 +4,7 @@ const controller = require('./signup/controllers.js');
 const resController = require('./reservation/controller.js');
 const mapController = require('./map/controller.js');
 
+const auth = require('./login/auth.js');
 router
   .route('/reservations/post')
   .post(resController.makeReservation);
@@ -23,6 +24,8 @@ router
 router
   .route('/signup')
   .post(controller.signup);
+
+router.route("/login").post(auth.login);
 
 // router
 //   .route('/signin')
