@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS user_vehicles (
 CREATE TABLE IF NOT EXISTS user_payment (
   id                serial PRIMARY KEY,
   user_id           INTEGER,
-  credit_card       varchar(20),
-  billing_address   TEXT,
+  token             TEXT,
+  trans_date        DATE,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
@@ -62,9 +62,9 @@ CREATE TABLE IF NOT EXISTS reservations (
 );
 
 CREATE TABLE IF NOT EXISTS unavailable (
-  id                serial PRIMARY KEY,
+  u_id                serial PRIMARY KEY,
   space_id          INTEGER,
   unavailable_start varchar(100),
   unavailable_end   varchar(100),
   FOREIGN KEY (space_id) REFERENCES spaces (id)
-)
+);

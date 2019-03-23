@@ -19,7 +19,7 @@ router
   
 router
   .route('/map/available')
-  .get(mapController.)
+  .get(mapController.findAvailability)
   
 router
   .route('/signup')
