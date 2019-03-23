@@ -49,11 +49,13 @@ module.exports = {
       pool.query(str, (err) => {
         response(err);
       })
-    },
+    }
+  },
         
   map: {
     availableSpots: (params, response) => {
-      const str = 'SELECT * FROM unavailable;';
+      // console.log('in available spots')
+      const str = `SELECT s.*, JSON_STRIP_NULLS(JSON_AGG(JSON_BUILD_OBJECT('id', u.u_id, 'start', u.unavailable_start, 'end', u.unavailable_end))) AS notAvail FROM spaces s LEFT OUTER JOIN unavailable u ON s.id = u.space_id GROUP BY s.id`;
       pool.query(str, (err, spots) => {
         response(err, spots);
       })
@@ -82,5 +84,5 @@ module.exports = {
   //     })
   //   }
   // }
-}
+
 }
