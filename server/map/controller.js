@@ -8,7 +8,7 @@ module.exports = {
         res.status(404).end();
       } else {
         console.log('FOUND AVAILABLE SPOTS');
-        res.status(201).json(data);
+        res.status(200).json(data.rows);
       }
     })
   }
