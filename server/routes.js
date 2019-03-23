@@ -28,6 +28,14 @@ router
 router.route("/login").post(auth.login);
 
 // router
+//   .route('/login')
+//   .get(loginController.login);
+
+// router 
+//   .route('/login')
+//   .post(loginController.login);
+
+// router 
 //   .route('/signin')
 //   .post(controller.signin);
 

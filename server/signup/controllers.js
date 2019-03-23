@@ -1,5 +1,12 @@
 const db = require('../../database/models.js');
 const bcrypt = require("bcrypt");
+function validUser(user) {
+  const validEmail = typeof user.email == 'string' && user.email.trim()!= '';
+  const validPassword = typeof user.user_password =='string' && user.user_password.trim()!= '' && user.user_password.trim().length >= 6;
+  return validEmail && validPassword;
+}
+
+
 module.exports = {
  
     signup: async (req, res, next) => {
@@ -29,4 +36,40 @@ module.exports = {
       }
     }
 }
+// const LocalStrategy = require('password-local').Strategy;
 
+// module.exports = {
+//   signup: (async function (req, res) {
+//     try {
+//       const client = await pool.connect();
+//       await client.query('BEGIN')
+//       var hash = await bcrypt.hashSync(req.body.user_password, 5);
+//       await JSON.stringify(client.query('SELECT id FROM "users" WHERE "email" = $1', [req.body.firstname], function(err,result) {
+//         if (result.rows[0]) {
+//           req.flash(
+//             "warning",
+//             "This email address is already registered. <a href='/login'>Log in!</a>"
+//           );
+//           res.redirect('/signup');
+//         }
+//         else {
+//           client.query('INSERT INTO users ("firstname","lastname","email","password") VALUES ($1,$2,$3,$4)', [req.body['firstname'], req.body['lastname'], req.body['email'], hash],function(err, result) {
+//             if (err) {
+//               console.log(err)
+//             } else {
+//               client.query('COMMIT')
+//               console.log(result)
+//               req.flash('success', 'user created')
+//               // res.redirect('/login');
+//               return;
+//             }
+//           });
+//         }
+//       }));
+//       client.release();
+//     }
+//     catch(err) {
+//       throw (err)
+//     }
+//   })
+// }
