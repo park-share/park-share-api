@@ -61,3 +61,4 @@ typings/
 .next
 .node_modules
 package-lock.json
+STRIPE_CONFIG.js
