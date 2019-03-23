@@ -46,13 +46,6 @@ CREATE TABLE IF NOT EXISTS spaces (
   directions        TEXT,
   weekday_rate      REAL,
   weekend_rate      REAL,
-  monday            varchar(100),
-  tuesday           varchar(100),
-  wednesday         varchar(100),
-  thursday          varchar(100),
-  friday            varchar(100),
-  saturday          varchar(100),
-  sunday            varchar(100),
   FOREIGN KEY (owner_id) REFERENCES owners (id)
 );
 
