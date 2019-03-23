@@ -12,6 +12,20 @@ module.exports = {
       }
     })
   },
+  chargeReservation: async (req, res) => {
+    try {
+      let {status} = await stripe.charges.create({
+        amount: 2000,
+        currency: "usd",
+        description: "An example charge",
+        source: req.body
+      });
+      res.json({status});
+    } catch (err) {
+      console.error(err)
+      res.status(500).end('PURCHASE FAILED');
+    }
+  },
   startReservation: (req, res) => {
     db.startRes(req.body, (err) => {
       if (err) {

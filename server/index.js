@@ -13,6 +13,10 @@ const cookieParser = require("cookie-parser");
 var flash = require("connect-flash");
 // const passport = require('./passport.js');
 
+const { STRIPE_API_KEY } = require('../STRIPE_CONFIG.js');
+const stripe = require('stripe')(STRIPE_API_KEY);
+
+app.use(parser.text());
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 // app.use(passport.initialize());
