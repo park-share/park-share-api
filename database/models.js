@@ -30,14 +30,16 @@ module.exports = {
       })
     }
   },
-  map: {
-    availableSpots: (params, response) => {
-      const str = 'SELECT * FROM unavailable;';
-      pool.query(str, (err, spots) => {
-        response(err, spots);
-      })
-    }
-  },
+  // getOneByEmail: function(email) {
+  //   return knex('user').where('email',email).first();
+    // const queryStr = 'select * from user where "email"= $1';
+    // pool.query('select id from user where "email"= $1',(err,results)=> {
+    //   return results;
+    // });
+  // },
+  // select exists(select true from users where email = 'hihihi')
+
+
   reservations: {
     reserve: (params, response) => {
       const { user_id, space_id, start_res, end_res } = params;
@@ -59,6 +61,38 @@ module.exports = {
       pool.query(str, (err) => {
         response(err);
       })
+    },
+        
+  map: {
+    availableSpots: (params, response) => {
+      const str = 'SELECT * FROM unavailable;';
+      pool.query(str, (err, spots) => {
+        response(err, spots);
+      })
     }
   }
+  // reservations: {
+  //   reserve: (params, response) => {
+  //     const { user_id, space_id, start_res, end_res } = params;
+  //     const str = `INSERT INTO reservations (user_id, space_id, start_res, end_res) VALUES ('${user_id}', '${space_id}', '${start_res}', '${end_res}') RETURNING id;`;
+  //     pool.query(str, (err, id) => {
+  //       response(err, id);
+  //     })
+  //   },
+  //   startRes: (params, response) => {
+  //     const { id, actual_start } = params;
+  //     const str = `UPDATE reservations SET actual_start='${actual_start}' WHERE id=${id};`;
+  //     pool.query(str, (err) => {
+  //       response(err);
+  //     })
+  //   },
+  //   endRes: (params, response) => {
+  //     const { id, actual_end } = params;
+  //     const str = `UPDATE reservations SET actual_end='${actual_end}' WHERE id=${id};`;
+  //     pool.query(str, (err) => {
+  //       response(err);
+  //     })
+  //   }
+  // }
+}
 }
