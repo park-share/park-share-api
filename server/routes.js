@@ -17,9 +17,9 @@ router
   .route('/reservations/end')
   .put(resController.endReservation);
   
-// router
-//   .route('/map/available')
-//   .get(mapController.)
+router
+  .route('/map/available')
+  .get(mapController.findAvailability)
   
 router
   .route('/signup')
