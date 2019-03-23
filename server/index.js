@@ -5,21 +5,21 @@ const SSLPORT = 3030;
 const path = require('path');
 const router = require('./routes');
 const cors = require('cors');
-const app = express();
-// const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const https= require('https');
 const http = require('http');
 const cookieParser = require("cookie-parser");
 var flash = require("connect-flash");
-const passport = require('./passport.js');
+// const passport = require('./passport.js');
+require('./passport');
 
+const app = express();
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 // app.use(passport.initialize());
 // app.use(passport.session());
-app.use(cookieParser());
-app.use(flash());
+// app.use(cookieParser());
+// app.use(flash());
 app.use(cors());
 // app.use(express.static(path.join(__dirname,'..')))
 app.use(express.static(path.join(__dirname + "/../../park-share-ui/client/dist/")));

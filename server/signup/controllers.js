@@ -10,7 +10,7 @@ function validUser(user) {
 module.exports = {
  
     signup: async (req, res, next) => {
-      // console.log('in post');
+      console.log('in post');
       console.log(req.body)
       if(validUser(req.body)) {
         // db.getOneByEmail(req.body.email)
@@ -20,7 +20,8 @@ module.exports = {
         //     user,message:'yay'
         //   });
         // });
-        var hash = bcrypt.hashSync(req.body.user_password,8);
+        var salt=bcrypt.genSaltSync(8);
+        var hash = bcrypt.hashSync(req.body.user_password,salt);
         console.log(hash);
         var params = [req.body['firstname'],req.body['lastname'],req.body['email'],hash,req.body['birthday'],req.body['phone']]
           db.users.post(params, (err, results) => {
