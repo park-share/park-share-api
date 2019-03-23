@@ -62,13 +62,6 @@ CREATE TABLE IF NOT EXISTS reservations (
 );
 
 CREATE TABLE IF NOT EXISTS unavailable (
-  id                serial PRIMARY KEY,
-  space_id          INTEGER,
-  unavailable_start varchar(100),
-  unavailable_end   varchar(100),
-  FOREIGN KEY (space_id) REFERENCES spaces (id)
-);
-CREATE TABLE IF NOT EXISTS unavailable (
   u_id                serial PRIMARY KEY,
   space_id          INTEGER,
   unavailable_start varchar(100),
