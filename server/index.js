@@ -8,7 +8,7 @@ const cors = require('cors');
 const LocalStrategy = require("passport-local").Strategy;
 
 
-const app = express();
+
 const https = require('https');
 const http = require('http');
 const cookieParser = require("cookie-parser");

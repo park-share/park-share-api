@@ -39,7 +39,7 @@ module.exports = {
         if (bcrypt.compareSync(req.body.user_password,results.rows[0]["user_password"])) {
           res.status(200).json(results.rows[0]["id"]);
         } else {
-          res.status(422).send(err)
+          res.status(422).json('incorrect password')
         }
       } 
     });
