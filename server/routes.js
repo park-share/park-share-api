@@ -27,6 +27,10 @@ router
 
 router.route("/login").post(auth.login);
 
+router
+  .route('/charge')
+  .post(resController.chargeReservation);
+
 // router
 //   .route('/login')
 //   .get(loginController.login);
