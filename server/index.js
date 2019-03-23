@@ -17,6 +17,7 @@ const app = express();
 const https = require('https');
 const http = require('http');
 
+const app = express();
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 // app.use(passport.initialize());
