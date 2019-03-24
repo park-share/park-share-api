@@ -27,20 +27,4 @@ router
 
 router.route("/login").post(auth.login);
 
-router
-  .route('/charge')
-  .post(resController.chargeReservation);
-
-// router
-//   .route('/login')
-//   .get(loginController.login);
-
-// router 
-//   .route('/login')
-//   .post(loginController.login);
-
-// router 
-//   .route('/signin')
-//   .post(controller.signin);
-
 module.exports = router;
