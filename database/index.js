@@ -3,8 +3,9 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   host: 'localhost',
-  user: 'taylorbantle',
+  user: 'postgres',
   database: 'park_share'
+  
 });
 
 pool.connect() 

@@ -1,6 +1,7 @@
 // const express = require('express');
 // const router = express.Router();
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+
 // const passport = require("passport");
 // /* POST login. */
 // router.post('/login', function (req, res, next) {
@@ -33,11 +34,14 @@ module.exports = {
 
     db.users.finduser(params, (err, results) => {
       if (err) {
-        res.status(404).send(err);
+        res.status(422).send(err);
       } else { 
-        // res.status(202).send(results.rows[0])
         if (bcrypt.compareSync(req.body.user_password,results.rows[0]["user_password"])) {
-          res.status(200).json(results.rows[0]["id"]);
+          jwt.sign(results.rows[0], "thisismykey", { expiresIn: '1h' }, (err, token) => {
+            if(err) { console.log(err) }    
+                res.send(token);
+          });
+          // res.status(200).json(results.rows[0]);
         } else {
           res.status(422).json('incorrect password')
         }
