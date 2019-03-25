@@ -60,6 +60,25 @@ module.exports = {
         response(err, spots);
       })
     }
+  },
+
+  schedule: {
+    getReservations: (params, response) => {
+      const { id } = params;
+      const str = `SELECT * FROM spaces s inner join reservations r on r.space_id = s.id WHERE r.user_id = ${id}`;
+      // const str = `SELECT * FROM reservations r inner join spaces s on r.space_id = s.id WHERE r.user_id = ${id}`;
+      pool.query(str, (err, results) => {
+        response(err, results);
+      }) 
+    },
+    deleteReservation: (params, response) => {
+      const { id } = params;
+      console.log('id is', id) 
+      const str = `DELETE FROM reservations where id = ${id}`
+      pool.query(str, (err, results) => {
+        response(err, results)
+      })
+    }
   }
   // reservations: {
   //   reserve: (params, response) => {
@@ -81,7 +100,7 @@ module.exports = {
   //     const str = `UPDATE reservations SET actual_end='${actual_end}' WHERE id=${id};`;
   //     pool.query(str, (err) => {
   //       response(err);
-  //     })
+  //     }) 
   //   }
   // }
 
