@@ -30,7 +30,7 @@ module.exports = {
 
   reservations: {
     reserve: (params, response) => {
-      const { user_id, space_id, start_res, end_res } = params;
+      const { user_id, space_id, start_res, end_res } = params.spot;
       const str = `INSERT INTO reservations (user_id, space_id, start_res, end_res) VALUES ('${user_id}', '${space_id}', '${start_res}', '${end_res}') RETURNING id;`;
       pool.query(str, (err, id) => {
         response(err, id);
