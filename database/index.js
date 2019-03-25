@@ -2,10 +2,11 @@ const { Pool } = require('pg');
 // const Sequelize = require("sequelize");
 
 const pool = new Pool({
-  host: 'localhost',
+  host: '54.183.143.103',
+  port: 5432,
+  database: 'park_share',
   user: 'postgres',
-  database: 'park_share'
-  
+  password: 'parkshare'
 });
 
 pool.connect() 
