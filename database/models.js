@@ -19,11 +19,15 @@ module.exports = {
         }
       });
     },
-    finduser: (params,callback)=> {
+    finduser: (params, response)=> {
       console.log('in db find user')
       const queryStr = 'select * from users where email = $1';
       pool.query(queryStr, params, (err, results)=> {
-        callback(err, results);
+        if(results.rowCount === 0) {
+          response(err,null)
+        } else {
+          response(null,results)
+        }
       })
     }
   },
