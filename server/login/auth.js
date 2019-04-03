@@ -33,22 +33,59 @@ module.exports = {
     var params = [req.body['email']];
 
     db.users.finduser(params, (err, results) => {
-      if (err) {
-        res.status(422).send(err);
-      } else { 
-        if (bcrypt.compareSync(req.body.user_password,results.rows[0]["user_password"])) {
-          jwt.sign(results.rows[0], "thisismykey", { expiresIn: '1h' }, (err, token) => {
-            if(err) { console.log(err) }    
-                res.send(token);
-          });
-          // res.status(200).json(results.rows[0]);
-        } else {
-          res.status(422).json('incorrect password')
+      if (results) {
+        if (results.rows[0]['user_password']) {
+          if (bcrypt.compareSync(req.body.user_password, results.rows[0]["user_password"])) {
+            jwt.sign(results.rows[0], "thisismykey", { expiresIn: '1h' }, (err, token) => {
+              res.send(results.rows[0]["email"]);
+            });
+          } else {
+            res.send('Incorrect password')
+          }
+        }else {
+          res.send("Username does not exist");
         }
-      } 
+      } else {
+        res.send("Username does not exist");
+      }
+
+
+
+      // if (!results) {
+      //   res.send("Username does not exist");
+      // } else { 
+      //   if (bcrypt.compareSync(req.body.user_password,results.rows[0]["user_password"])) {
+      //     jwt.sign(results.rows[0], "thisismykey", { expiresIn: '1h' }, (err, token) => {
+      //       // if(err) { console.log(err) }    
+      //       res.send(results.rows[0]["email"]);
+      //     });
+      //     // res.status(200).json(results.rows[0]);
+      //   } else {
+      //     res.send('Incorrect password')
+      //   }
+      //   // res.send(results.rows[0]["email"])
+      // } 
     });
   }
 }
 
 
 
+postLogin: (req, res) => {
+  const { username, password } = req.body;
+  console.log(req.body);
+  User.findOne({ username })
+    .then((user) => {
+      if (!user) {
+        res.send('Username does not exist');
+      } else {
+        bcrypt.compare(password, user.password, (err, result) => {
+          if (result === true) {
+            res.send(username);
+          } else {
+            res.send('Incorrect password');
+          }
+        });
+      }
+    });
+}
