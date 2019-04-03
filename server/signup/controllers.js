@@ -13,24 +13,28 @@ module.exports = {
       console.log('in post');
       console.log(req.body)
       if(validUser(req.body)) {
-        // db.getOneByEmail(req.body.email)
-        // .then(user => {
-        //   console.log('user',user);
-        //   res.json({
-        //     user,message:'yay'
-        //   });
-        // });
-        var salt=bcrypt.genSaltSync(8);
-        var hash = bcrypt.hashSync(req.body.user_password,salt);
-        console.log(hash);
-        var params = [req.body['firstname'],req.body['lastname'],req.body['email'],hash,req.body['birthday'],req.body['phone']]
-          db.users.post(params, (err, results) => {
-          if (err) {
-            res.status(404).send(err)
+        console.log('in server')
+        var params = [req.body['email']];
+        db.users.getOneByEmail(params, (err, results)=> {
+          if (results) {
+            // res.status(201).send(results)
+            var salt=bcrypt.genSaltSync(8);
+            var hash = bcrypt.hashSync(req.body.user_password,salt);
+            console.log(hash);
+            var params = [req.body['firstname'],req.body['lastname'],req.body['email'],hash,req.body['birthday'],req.body['phone']]
+              db.users.post(params, (err, results) => {
+              if (results) {
+                res.status(201).send(results)
+              } else {
+                res.status(422).send(err)
+              }
+            })
           } else {
-            res.status(201).send(results)
+            console.log('err in server',err)
+            res.send('email has already existed')
           }
         })
+        
       } else {
         next(new Error('Invalid user'));
       }

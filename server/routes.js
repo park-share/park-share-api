@@ -4,7 +4,6 @@ const controller = require('./signup/controllers.js');
 const resController = require('./reservation/controller.js');
 const mapController = require('./map/controller.js');
 const scheduleController = require('./schedule/controller.js')
-
 const auth = require('./login/auth.js');
 router
   .route('/reservations/post')
@@ -43,17 +42,5 @@ router
   .delete(scheduleController.deleteReservation)
 
 
-// router
-//   .route('/login')
-//   .get(loginController.login);
 
-// router 
-//   .route('/login')
-//   .post(loginController.login);
-
-// router 
-//   .route('/signin')
-//   .post(controller.signin);
-
->>>>>>> finished schedule api
 module.exports = router;
