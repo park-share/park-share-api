@@ -10,9 +10,9 @@ module.exports = {
       pool.query(queryStr1, params, (err, results) => {
         console.log(results.rows[0].exists);
         if (results.rows[0].exists===true) {
-          callback(err,null);
+          callback(err, null);
         } else {
-          callback(null,results);
+          callback(null, results);
         }
       });
     },
@@ -23,7 +23,7 @@ module.exports = {
         "insert into users (firstname, lastname, email, user_password,birthday,phone) values ($1,$2,$3,$4,$5,$6)";
         pool.query(queryStr, params, (err, results) => {
           if (err) {
-            callback(err,null)
+            callback(err, null)
           }else {
             callback(null, results);
           }
