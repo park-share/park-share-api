@@ -16,16 +16,18 @@ router
 router
   .route('/reservations/end')
   .put(resController.endReservation);
-  
+
 router
   .route('/map/available')
   .get(mapController.findAvailability)
-  
+
 router
   .route('/signup')
   .post(controller.signup);
 
-router.route("/login").post(auth.login);
+router
+  .route("/login")
+  .post(auth.login);
 
 
 router
