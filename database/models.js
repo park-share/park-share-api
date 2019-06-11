@@ -9,7 +9,7 @@ module.exports = {
         'select exists (select true from users where "email" = $1)';
       pool.query(queryStr1, params, (err, results) => {
         console.log(results.rows[0].exists);
-        if (results.rows[0].exists===true) {
+        if (results.rows[0].exists === true) {
           callback(err, null);
         } else {
           callback(null, results);
@@ -21,13 +21,13 @@ module.exports = {
       console.log("in db post");
       const queryStr =
         "insert into users (firstname, lastname, email, user_password,birthday,phone) values ($1,$2,$3,$4,$5,$6)";
-        pool.query(queryStr, params, (err, results) => {
-          if (err) {
-            callback(err, null)
-          }else {
-            callback(null, results);
-          }
-        });
+      pool.query(queryStr, params, (err, results) => {
+        if (err) {
+          callback(err, null)
+        } else {
+          callback(null, results);
+        }
+      });
     },
     finduser: (params, response) => {
       console.log("in db find user");
@@ -44,7 +44,8 @@ module.exports = {
 
   reservations: {
     reserve: (params, response) => {
-      const { user_id, space_id, start_res, end_res } = params.spot;
+      console.log('res params', params)
+      const { user_id, space_id, start_res, end_res } = params;
       const str = `INSERT INTO reservations (user_id, space_id, start_res, end_res) VALUES ('${user_id}', '${space_id}', '${start_res}', '${end_res}') RETURNING id;`;
       pool.query(str, (err, id) => {
         response(err, id);
@@ -70,7 +71,25 @@ module.exports = {
     availableSpots: (params, response) => {
       // console.log('in available spots')
       const str = `SELECT s.*, JSON_STRIP_NULLS(JSON_AGG(JSON_BUILD_OBJECT('id', u.u_id, 'start', u.unavailable_start, 'end', u.unavailable_end))) AS notAvail FROM spaces s LEFT OUTER JOIN unavailable u ON s.id = u.space_id GROUP BY s.id`;
+
+      // const str = `SELECT s.*, 
+      // JSON_STRIP_NULLS(JSON_AGG(JSON_BUILD_OBJECT('id', u.u_id, 'start', u.unavailable_start, 'end', u.unavailable_end))) AS notAvail
+      // FROM spaces s
+      // LEFT OUTER JOIN unavailable u ON s.id = u.space_id
+      // GROUP BY s.id`;
+
+      // const str = `SELECT space_id, unavailable_start AS start, unavailable_end AS end
+      // FROM unavailable
+      // UNION
+      // SELECT space_id, start_res AS start, end_res AS end 
+      // FROM reservations`
+
+      // const str = `SELECT s.*, 
+      // JSON_STRIP_NULLS(JSON_AGG(JSON_BUILD_OBJECT('id', r.id, 'start', r.start_res, 'end', r.end_res))) 
+      // AS notAvail FROM spaces s 
+      // LEFT OUTER JOIN reservations r ON s.id = r.space_id GROUP BY s.id `;
       pool.query(str, (err, spots) => {
+        // console.log('spots', spots[0])
         response(err, spots);
       });
     }

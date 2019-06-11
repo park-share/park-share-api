@@ -1,43 +1,69 @@
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE
+IF NOT EXISTS users
+(
   id                serial PRIMARY KEY,
-  firstname         varchar(40),
-  lastname          varchar(40),
-  email             varchar(100) UNIQUE,
+  firstname         varchar
+(40),
+  lastname          varchar
+(40),
+  email             varchar
+(100) UNIQUE,
   user_password     TEXT,
   birthday          DATE,
-  phone             varchar(12)
+  phone             varchar
+(12)
 );
 
-CREATE TABLE IF NOT EXISTS user_vehicles (
+CREATE TABLE
+IF NOT EXISTS user_vehicles
+(
   id                serial PRIMARY KEY,
   user_id           INTEGER,
-  car_make          varchar(30),
-  car_model         varchar(30),
-  license_plate     varchar(10),
+  car_make          varchar
+(30),
+  car_model         varchar
+(30),
+  license_plate     varchar
+(10),
   year              INTEGER,
-  FOREIGN KEY (user_id) REFERENCES users (id)
+  FOREIGN KEY
+(user_id) REFERENCES users
+(id)
 );
 
-CREATE TABLE IF NOT EXISTS user_payment (
+CREATE TABLE
+IF NOT EXISTS user_payment
+(
   id                serial PRIMARY KEY,
   user_id           INTEGER,
   token             TEXT,
   trans_date        DATE,
-  FOREIGN KEY (user_id) REFERENCES users (id)
+  FOREIGN KEY
+(user_id) REFERENCES users
+(id)
 );
 
-CREATE TABLE IF NOT EXISTS owners (
+CREATE TABLE
+IF NOT EXISTS owners
+(
   id                serial PRIMARY KEY,
-  firstname         varchar(40),
-  lastname          varchar(40),
-  email             varchar(100) UNIQUE,
-  owner_password    varchar(30),
+  firstname         varchar
+(40),
+  lastname          varchar
+(40),
+  email             varchar
+(100) UNIQUE,
+  owner_password    varchar
+(30),
   account_number    TEXT,
   routing_number    TEXT,
-  bank              varchar(30)
+  bank              varchar
+(30)
 );
 
-CREATE TABLE IF NOT EXISTS spaces (
+CREATE TABLE
+IF NOT EXISTS spaces
+(
   id                serial PRIMARY KEY,
   owner_id          INTEGER,
   parking_address   TEXT,
@@ -46,25 +72,43 @@ CREATE TABLE IF NOT EXISTS spaces (
   directions        TEXT,
   weekday_rate      REAL,
   weekend_rate      REAL,
-  FOREIGN KEY (owner_id) REFERENCES owners (id)
+  FOREIGN KEY
+(owner_id) REFERENCES owners
+(id)
 );
 
-CREATE TABLE IF NOT EXISTS reservations (
+CREATE TABLE
+IF NOT EXISTS reservations
+(
   id                serial PRIMARY KEY,
   user_id           INTEGER,
   space_id          INTEGER,
-  start_res         varchar(20),
-  end_res           varchar(20),
-  actual_start      varchar(20),
-  actual_end        varchar(20),
-  FOREIGN KEY (user_id) REFERENCES users (id),
-  FOREIGN KEY (space_id) REFERENCES spaces (id)
+  start_res         varchar
+(100),
+  end_res           varchar
+(100),
+  actual_start      varchar
+(100),
+  actual_end        varchar
+(100),
+  FOREIGN KEY
+(user_id) REFERENCES users
+(id),
+  FOREIGN KEY
+(space_id) REFERENCES spaces
+(id)
 );
 
-CREATE TABLE IF NOT EXISTS unavailable (
+CREATE TABLE
+IF NOT EXISTS unavailable
+(
   u_id                serial PRIMARY KEY,
   space_id          INTEGER,
-  unavailable_start varchar(100),
-  unavailable_end   varchar(100),
-  FOREIGN KEY (space_id) REFERENCES spaces (id)
+  unavailable_start varchar
+(100),
+  unavailable_end   varchar
+(100),
+  FOREIGN KEY
+(space_id) REFERENCES spaces
+(id)
 );

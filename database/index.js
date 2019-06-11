@@ -7,13 +7,15 @@ const pool = new Pool({
   // database: 'park_share',
   // user: 'postgres',
   // password: 'parkshare'
-  host: 'localhost',
-  user: 'haoyancang',
+  host: '127.0.0.1',
+  port: 5432,
+  user: 'taylorbantle',
+  password: 'taylor',
   database: 'park_share'
-  
+
 });
 
-pool.connect() 
+pool.connect()
   .then(() => console.log("PostgreSQL CONNECTION SUCCESSFUL"))
   .catch(err => console.error(err));
 
