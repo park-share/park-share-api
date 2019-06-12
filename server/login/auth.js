@@ -28,8 +28,6 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   login: (req, res, next) => {
-    console.log(req.body)
-    console.log('in post log in');
     var params = [req.body['email']];
 
     db.users.finduser(params, (err, results) => {
